@@ -63,7 +63,7 @@ export default function MetricCard({
         0{suffix}
       </div>
 
-      <div className="text-sm font-semibold text-[#00A859] mb-1">{label}</div>
+      <div className="text-sm font-semibold text-[#0097D7] mb-1">{label}</div>
       <div className="text-sm text-gray-600">{description}</div>
     </motion.div>
   );
