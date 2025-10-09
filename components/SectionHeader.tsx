@@ -37,7 +37,7 @@ export default function SectionHeader({
         {title}
       </h2>
       {subtitle && (
-        <p className="text-lg text-gray-600 max-w-2xl">{subtitle}</p>
+        <p className={`text-lg text-gray-600 max-w-2xl ${centered ? 'mx-auto' : ''}`}>{subtitle}</p>
       )}
     </motion.div>
   );
