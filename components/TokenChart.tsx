@@ -12,6 +12,7 @@ import {
   Legend,
 } from 'recharts';
 import { IterationTokens } from '@/lib/supabase';
+import TokenCalculator from './TokenCalculator';
 
 interface TokenChartProps {
   data: IterationTokens[];
@@ -122,20 +123,24 @@ export default function TokenChart({ data }: TokenChartProps) {
       </div>
 
       <div className="bg-gradient-to-br from-[#00A859]/5 to-[#8CC63F]/5 rounded-xl p-6 border border-[#00A859]/20">
-        <div className="flex items-center justify-between flex-wrap gap-4">
-          <div>
-            <div className="text-sm text-gray-600 mb-1">Total acumulado</div>
-            <div className="text-3xl font-bold text-[#00A859]">
-              {(totalTokens / 1000000).toFixed(1)}M tokens
+        <div className="space-y-4">
+          <div className="flex items-center justify-between flex-wrap gap-4">
+            <div>
+              <div className="text-sm text-gray-600 mb-1">Total acumulado</div>
+              <div className="text-3xl font-bold text-[#00A859]">
+                {(totalTokens / 1000000).toFixed(1)}M tokens
+              </div>
+            </div>
+            <div className="text-sm text-gray-600 max-w-md">
+              Estimación aproximada de{' '}
+              <span className="font-semibold text-[#006D38]">
+                5 millones de tokens
+              </span>{' '}
+              por proyecto completo, considerando todas las iteraciones y refinamientos.
             </div>
           </div>
-          <div className="text-sm text-gray-600 max-w-md">
-            Estimación aproximada de{' '}
-            <span className="font-semibold text-[#006D38]">
-              5 millones de tokens
-            </span>{' '}
-            por proyecto completo, considerando todas las iteraciones y refinamientos.
-          </div>
+
+          <TokenCalculator />
         </div>
       </div>
     </motion.div>
