@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Plus, Loader2 } from 'lucide-react';
+import { Sparkles, Loader2 } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import {
   Dialog,
@@ -84,11 +84,14 @@ export default function RequestFab() {
   return (
     <>
       <button
-        aria-label="Solicitar proceso UX"
+        aria-label="Solicitar apoyo del equipo UX"
         onClick={() => setOpen(true)}
-        className="fixed bottom-6 right-6 md:bottom-[72px] md:right-[72px] z-50 h-14 w-14 rounded-full bg-gradient-to-br from-[#00A859] to-[#8CC63F] text-white shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200 flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#00A859]"
+        className="fixed bottom-6 right-6 md:bottom-[72px] md:right-[72px] z-50 rounded-full bg-gradient-to-br from-[#00A859] to-[#8CC63F] text-white shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200 flex items-center justify-center gap-2 px-5 py-3.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#00A859]"
       >
-        <Plus className="w-6 h-6" />
+        <Sparkles className="w-5 h-5" />
+        <span className="text-sm font-semibold whitespace-nowrap">
+          Solicitar apoyo del equipo UX
+        </span>
       </button>
 
       <Dialog open={open} onOpenChange={setOpen}>
