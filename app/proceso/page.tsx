@@ -7,6 +7,7 @@ import Timeline from '@/components/Timeline';
 import TokenChart from '@/components/TokenChart';
 import MetricCard from '@/components/MetricCard';
 import CasosDeEjemplo from '@/components/CasosDeEjemplo';
+import RequestFab from '@/components/proceso/RequestFab';
 import { supabase, TimelineStep, IterationTokens, Metrics } from '@/lib/supabase';
 
 export default function ProcesoPage() {
@@ -118,6 +119,8 @@ export default function ProcesoPage() {
           </div>
         </section>
       )}
+
+      <RequestFab />
     </div>
   );
 }
