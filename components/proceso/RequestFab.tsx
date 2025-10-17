@@ -22,6 +22,7 @@ export default function RequestFab() {
     product: '',
     business: '',
     owner: '',
+    email: '',
     description: '',
   });
   const [loading, setLoading] = useState(false);
@@ -33,11 +34,22 @@ export default function RequestFab() {
       !form.product.trim() ||
       !form.business.trim() ||
       !form.owner.trim() ||
+      !form.email.trim() ||
       !form.description.trim()
     ) {
       toast({
         title: 'Completa todos los campos',
         description: 'Revisa la información ingresada.',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(form.email.trim())) {
+      toast({
+        title: 'Correo electrónico inválido',
+        description: 'Por favor ingresa un correo electrónico válido.',
         variant: 'destructive',
       });
       return;
@@ -58,6 +70,7 @@ export default function RequestFab() {
       product: form.product.trim(),
       business_unit: form.business.trim(),
       owner_name: form.owner.trim(),
+      email: form.email.trim(),
       description: form.description.trim(),
     });
 
@@ -77,7 +90,7 @@ export default function RequestFab() {
       description: 'Te contactaremos pronto.',
     });
 
-    setForm({ product: '', business: '', owner: '', description: '' });
+    setForm({ product: '', business: '', owner: '', email: '', description: '' });
     setOpen(false);
   };
 
@@ -146,6 +159,23 @@ export default function RequestFab() {
                   setForm((f) => ({ ...f, owner: e.target.value }))
                 }
                 placeholder="Tu nombre completo"
+                required
+                className="border-gray-300 focus:ring-[#00A859] focus:border-[#00A859]"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="email" className="text-sm font-semibold text-gray-700">
+                Correo electrónico <span className="text-red-500">*</span>
+              </Label>
+              <Input
+                id="email"
+                type="email"
+                value={form.email}
+                onChange={(e) =>
+                  setForm((f) => ({ ...f, email: e.target.value }))
+                }
+                placeholder="tu.correo@ejemplo.com"
                 required
                 className="border-gray-300 focus:ring-[#00A859] focus:border-[#00A859]"
               />
