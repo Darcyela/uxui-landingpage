@@ -128,6 +128,7 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* HIDDEN: Metrics section - uncomment to restore
       {metrics && (
         <section id="impacto" className="py-20 bg-gradient-to-br from-gray-50 to-gray-100">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -165,6 +166,7 @@ export default function HomePage() {
           </div>
         </section>
       )}
+      */}
     </div>
   );
 }
