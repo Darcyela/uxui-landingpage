@@ -46,6 +46,7 @@ export default function HeroSection() {
                   Explorar Proceso
                 </motion.div>
               </Link>
+              {/* HIDDEN: Ver Métricas button - uncomment to restore
               <a href="#impacto">
                 <motion.div
                   whileHover={{ scale: 1.05 }}
@@ -55,6 +56,7 @@ export default function HeroSection() {
                   Ver Métricas
                 </motion.div>
               </a>
+              */}
             </div>
           </motion.div>
 
