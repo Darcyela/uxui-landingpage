@@ -18,7 +18,7 @@ export default function DownloadStylesButton() {
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       onClick={handleDownload}
-      className="inline-flex items-center gap-2 px-6 py-3 bg-white text-[#27933E] border-2 border-[#27933E] rounded-xl font-semibold hover:bg-[#27933E]/5 transition-colors shadow-lg"
+      className="inline-flex items-center gap-2 px-6 py-3 bg-white text-[#27933E] border-2 border-[#27933E] rounded-full font-semibold hover:bg-[#27933E]/5 transition-colors shadow-lg"
     >
       <Download className="w-5 h-5" />
       Descargar hoja de estilos

@@ -74,22 +74,22 @@ export default function ComponentGallery() {
         description="Variantes de botones con diferentes estilos, tamaños y estados."
         preview={
           <div className="flex flex-wrap gap-4">
-            <button className="px-6 py-3 bg-[#27933E] text-white rounded-xl font-semibold hover:bg-[#13C045] transition-colors shadow-md">
+            <button className="px-6 py-3 bg-[#27933E] text-white rounded-full font-semibold hover:bg-[#13C045] transition-colors shadow-md">
               Primario
             </button>
-            <button className="px-6 py-3 bg-[#2B6BDC] text-white rounded-xl font-semibold hover:bg-[#348FFF] transition-colors shadow-md">
+            <button className="px-6 py-3 bg-[#2B6BDC] text-white rounded-full font-semibold hover:bg-[#348FFF] transition-colors shadow-md">
               Secundario
             </button>
-            <button className="px-6 py-3 bg-transparent border-2 border-[#27933E] text-[#27933E] rounded-xl font-semibold hover:bg-[#CCF1DC] transition-colors">
+            <button className="px-6 py-3 bg-transparent border-2 border-[#27933E] text-[#27933E] rounded-full font-semibold hover:bg-[#CCF1DC] transition-colors">
               Ghost
             </button>
-            <button className="px-4 py-2 bg-[#27933E] text-white rounded-lg text-sm font-semibold hover:bg-[#13C045] transition-colors">
+            <button className="px-4 py-2 bg-[#27933E] text-white rounded-full text-sm font-semibold hover:bg-[#13C045] transition-colors">
               Pequeño
             </button>
-            <button className="px-8 py-4 bg-[#27933E] text-white rounded-xl text-lg font-semibold hover:bg-[#13C045] transition-colors shadow-lg">
+            <button className="px-8 py-4 bg-[#27933E] text-white rounded-full text-lg font-semibold hover:bg-[#13C045] transition-colors shadow-lg">
               Grande
             </button>
-            <button className="px-6 py-3 bg-[#66D495] text-white rounded-xl font-semibold cursor-not-allowed opacity-60" disabled>
+            <button className="px-6 py-3 bg-[#66D495] text-white rounded-full font-semibold cursor-not-allowed opacity-60" disabled>
               Deshabilitado
             </button>
           </div>
@@ -162,7 +162,7 @@ export default function ComponentGallery() {
           <div className="overflow-x-auto bg-white rounded-xl shadow-md">
             <table className="w-full">
               <thead>
-                <tr className="bg-[#E6F7E4]">
+                <tr className="bg-gray-100">
                   <th className="px-6 py-4 text-left text-sm font-semibold text-[#373737]">Nombre</th>
                   <th className="px-6 py-4 text-left text-sm font-semibold text-[#373737]">Rol</th>
                   <th className="px-6 py-4 text-left text-sm font-semibold text-[#373737]">Estado</th>
@@ -297,7 +297,7 @@ export default function ComponentGallery() {
                 />
               </div>
 
-              <button className="px-6 py-3 bg-[#27933E] text-white rounded-xl font-semibold hover:bg-[#13C045] transition-colors shadow-md">
+              <button className="px-6 py-3 bg-[#27933E] text-white rounded-full font-semibold hover:bg-[#13C045] transition-colors shadow-md">
                 Enviar Formulario
               </button>
             </form>

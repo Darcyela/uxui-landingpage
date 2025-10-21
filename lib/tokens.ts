@@ -50,6 +50,57 @@ export function getBrandColors(): ColorToken[] {
   return colors;
 }
 
+export function getSeguroColors(): ColorToken[] {
+  const colors: ColorToken[] = [];
+  const seguroColors = tokensData.global.color.brand.seguro;
+
+  Object.entries(seguroColors).forEach(([colorName, colorData]: [string, any]) => {
+    if (colorData.$type === 'color') {
+      colors.push({
+        name: colorName,
+        value: colorData.$value,
+        path: `brand.seguro.${colorName}`,
+      });
+    }
+  });
+
+  return colors;
+}
+
+export function getSaludColors(): ColorToken[] {
+  const colors: ColorToken[] = [];
+  const saludColors = tokensData.global.color.brand.salud;
+
+  Object.entries(saludColors).forEach(([colorName, colorData]: [string, any]) => {
+    if (colorData.$type === 'color') {
+      colors.push({
+        name: colorName,
+        value: colorData.$value,
+        path: `brand.salud.${colorName}`,
+      });
+    }
+  });
+
+  return colors;
+}
+
+export function getServiciosColors(): ColorToken[] {
+  const colors: ColorToken[] = [];
+  const serviciosColors = tokensData.global.color.brand.servicios;
+
+  Object.entries(serviciosColors).forEach(([colorName, colorData]: [string, any]) => {
+    if (colorData.$type === 'color') {
+      colors.push({
+        name: colorName,
+        value: colorData.$value,
+        path: `brand.servicios.${colorName}`,
+      });
+    }
+  });
+
+  return colors;
+}
+
 export function getTextColors(): ColorToken[] {
   const colors: ColorToken[] = [];
   const textColors = tokensData.global.color.text;
@@ -186,7 +237,7 @@ export function generateCSSVariables(): string {
   justify-content: center;
   padding: 12px 24px;
   border: none;
-  border-radius: 12px;
+  border-radius: 9999px;
   font-family: var(--font-body);
   font-size: 16px;
   font-weight: 600;
@@ -272,7 +323,7 @@ export function generateCSSVariables(): string {
 }
 
 .table th {
-  background-color: var(--color-surface-surface-background-seguro);
+  background-color: #f3f4f6;
   padding: 12px 16px;
   text-align: left;
   font-family: var(--font-heading);

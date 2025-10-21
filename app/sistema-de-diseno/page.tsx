@@ -11,7 +11,9 @@ import TokensSpacingRadius from '@/components/design-system/TokensSpacingRadius'
 import ComponentGallery from '@/components/design-system/ComponentGallery';
 import DownloadStylesButton from '@/components/design-system/DownloadStylesButton';
 import {
-  getBrandColors,
+  getSeguroColors,
+  getSaludColors,
+  getServiciosColors,
   getTextColors,
   getSurfaceColors,
   getSemanticColors,
@@ -21,12 +23,14 @@ import {
 
 const FIGMA_URL = 'https://www.figma.com/design/sistema-achs';
 
-type TokenTab = 'colores' | 'tipografia' | 'espaciado';
+type TokenTab = 'colores' | 'tipografia' | 'espaciado' | 'componentes';
 
 export default function SistemaDiseno() {
   const [activeTokenTab, setActiveTokenTab] = useState<TokenTab>('colores');
 
-  const brandColors = getBrandColors();
+  const seguroColors = getSeguroColors();
+  const saludColors = getSaludColors();
+  const serviciosColors = getServiciosColors();
   const textColors = getTextColors();
   const surfaceColors = getSurfaceColors();
   const semanticColors = getSemanticColors();
@@ -36,10 +40,10 @@ export default function SistemaDiseno() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
-      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#27933E] via-[#2B6BDC] to-[#27933E]">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-20 left-20 w-96 h-96 bg-white rounded-full blur-3xl" />
-          <div className="absolute bottom-20 right-20 w-96 h-96 bg-white rounded-full blur-3xl" />
+      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden bg-gray-50">
+        <div className="absolute inset-0">
+          <div className="absolute top-20 left-20 w-96 h-96 bg-[#27933E]/5 rounded-full blur-3xl" />
+          <div className="absolute bottom-20 right-20 w-96 h-96 bg-[#2B6BDC]/5 rounded-full blur-3xl" />
         </div>
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
@@ -50,18 +54,18 @@ export default function SistemaDiseno() {
               transition={{ duration: 0.8 }}
               className="space-y-6"
             >
-              <div className="inline-flex items-center space-x-2 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full">
-                <Palette className="w-4 h-4 text-white" />
-                <span className="text-sm font-medium text-white">
+              <div className="inline-flex items-center space-x-2 px-4 py-2 bg-[#2B6BDC]/10 rounded-full">
+                <Palette className="w-4 h-4 text-[#2B6BDC]" />
+                <span className="text-sm font-medium text-[#2B6BDC]">
                   Librería de Componentes
                 </span>
               </div>
 
-              <h1 className="text-5xl sm:text-6xl font-bold text-white leading-tight">
+              <h1 className="text-5xl sm:text-6xl font-bold text-[#27933E] leading-tight">
                 Sistema de Diseño ACHS
               </h1>
 
-              <p className="text-xl text-white/90 leading-relaxed">
+              <p className="text-xl text-gray-700 leading-relaxed">
                 Guía rápida y accesible para entender y usar nuestros componentes en tus proyectos.
               </p>
 
@@ -70,7 +74,7 @@ export default function SistemaDiseno() {
                   <motion.div
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-white text-[#27933E] rounded-xl font-semibold shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-[#27933E] text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
                   >
                     <ExternalLink className="w-5 h-5" />
                     Descargar en Figma
@@ -122,7 +126,7 @@ export default function SistemaDiseno() {
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
-            title="Tokens de Diseño"
+            title="Tokens de Diseño y Componentes"
             subtitle="Los bloques fundamentales de nuestro sistema de diseño"
             centered
           />
@@ -160,6 +164,16 @@ export default function SistemaDiseno() {
                 >
                   Espaciado y Radio
                 </button>
+                <button
+                  onClick={() => setActiveTokenTab('componentes')}
+                  className={`px-6 py-3 rounded-lg text-sm font-semibold transition-all ${
+                    activeTokenTab === 'componentes'
+                      ? 'bg-white text-[#27933E] shadow-md'
+                      : 'text-gray-600 hover:text-gray-900'
+                  }`}
+                >
+                  Componentes
+                </button>
               </div>
             </div>
 
@@ -172,7 +186,9 @@ export default function SistemaDiseno() {
             >
               {activeTokenTab === 'colores' && (
                 <>
-                  <TokensColorGrid colors={brandColors} title="Colores de Marca" />
+                  <TokensColorGrid colors={seguroColors} title="ACHS Seguro Laboral" />
+                  <TokensColorGrid colors={saludColors} title="ACHS Salud" />
+                  <TokensColorGrid colors={serviciosColors} title="ACHS Servicios" />
                   <TokensColorGrid colors={textColors} title="Colores de Texto" />
                   <TokensColorGrid colors={surfaceColors} title="Colores de Superficie" />
                   <TokensColorGrid colors={semanticColors} title="Colores Semánticos" />
@@ -189,21 +205,11 @@ export default function SistemaDiseno() {
               {activeTokenTab === 'espaciado' && (
                 <TokensSpacingRadius spacing={spacing} />
               )}
+
+              {activeTokenTab === 'componentes' && (
+                <ComponentGallery />
+              )}
             </motion.div>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 bg-gradient-to-br from-gray-50 to-gray-100">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            title="Componentes"
-            subtitle="Explora nuestra biblioteca de componentes reutilizables"
-            centered
-          />
-
-          <div className="mt-12">
-            <ComponentGallery />
           </div>
         </div>
       </section>
