@@ -1,9 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, X, CheckCircle, AlertCircle, Info, AlertTriangle, Loader2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import CodeBlock from './CodeBlock';
+import LayoutExample from './LayoutExample';
 
 interface ComponentExampleProps {
   title: string;
@@ -66,9 +67,43 @@ function ComponentExample({ title, description, preview, code }: ComponentExampl
 export default function ComponentGallery() {
   const [activeTab, setActiveTab] = useState(0);
   const [selectedRow, setSelectedRow] = useState<number | null>(null);
+  const [showModal, setShowModal] = useState(false);
+  const [showTooltip, setShowTooltip] = useState(false);
+  const [selectedBrand, setSelectedBrand] = useState<'seguro' | 'salud' | 'servicios'>('seguro');
 
   return (
     <div className="space-y-8">
+      <ComponentExample
+        title="Layout Base"
+        description="Estructura general con Header, Sidebar, Main y Footer. Cambia entre Desktop y Mobile."
+        preview={<LayoutExample />}
+        code={`<div class="layout">
+  <header class="layout__header">
+    <button class="menu-toggle">☰</button>
+    <h2>ACHS App</h2>
+    <div class="user-avatar"></div>
+  </header>
+
+  <div class="layout__body">
+    <aside class="layout__sidebar">
+      <nav>
+        <a href="#" class="nav-item nav-item--active">Inicio</a>
+        <a href="#" class="nav-item">Usuarios</a>
+        <a href="#" class="nav-item">Documentos</a>
+      </nav>
+    </aside>
+
+    <main class="layout__main">
+      <h3>Contenido Principal</h3>
+      <!-- Contenido aquí -->
+    </main>
+  </div>
+
+  <footer class="layout__footer">
+    © 2025 ACHS
+  </footer>
+</div>`}
+      />
       <ComponentExample
         title="Botones"
         description="Variantes de botones con diferentes estilos, tamaños y estados."
@@ -326,6 +361,295 @@ export default function ComponentGallery() {
 
   <button class="btn btn--primary">Enviar Formulario</button>
 </form>`}
+      />
+
+      <ComponentExample
+        title="Modal / Dialog"
+        description="Ventana modal con dos acciones (Aceptar y Cancelar)."
+        preview={
+          <>
+            <button
+              onClick={() => setShowModal(true)}
+              className="px-6 py-3 bg-[#27933E] text-white rounded-full font-semibold hover:bg-[#13C045] transition-colors shadow-md"
+            >
+              Abrir Modal
+            </button>
+
+            <AnimatePresence>
+              {showModal && (
+                <>
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
+                    onClick={() => setShowModal(false)}
+                  >
+                    <motion.div
+                      initial={{ scale: 0.9, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      exit={{ scale: 0.9, opacity: 0 }}
+                      onClick={(e) => e.stopPropagation()}
+                      className="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl"
+                    >
+                      <div className="flex items-start justify-between mb-6">
+                        <h3 className="text-2xl font-bold text-gray-900">Confirmar Acción</h3>
+                        <button
+                          onClick={() => setShowModal(false)}
+                          className="text-gray-400 hover:text-gray-600 transition-colors"
+                        >
+                          <X className="w-6 h-6" />
+                        </button>
+                      </div>
+                      <p className="text-gray-600 mb-8 leading-relaxed">
+                        ¿Estás seguro que deseas continuar con esta acción? Esta operación no se puede deshacer.
+                      </p>
+                      <div className="flex gap-3 justify-end">
+                        <button
+                          onClick={() => setShowModal(false)}
+                          className="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg font-semibold hover:bg-gray-300 transition-colors"
+                        >
+                          Cancelar
+                        </button>
+                        <button
+                          onClick={() => setShowModal(false)}
+                          className="px-6 py-3 bg-[#27933E] text-white rounded-lg font-semibold hover:bg-[#13C045] transition-colors"
+                        >
+                          Aceptar
+                        </button>
+                      </div>
+                    </motion.div>
+                  </motion.div>
+                </>
+              )}
+            </AnimatePresence>
+          </>
+        }
+        code={`<div class="modal">
+  <div class="modal__overlay">
+    <div class="modal__content">
+      <div class="modal__header">
+        <h3>Confirmar Acción</h3>
+        <button class="modal__close">×</button>
+      </div>
+      <div class="modal__body">
+        <p>¿Estás seguro que deseas continuar?</p>
+      </div>
+      <div class="modal__footer">
+        <button class="btn btn--secondary">Cancelar</button>
+        <button class="btn btn--primary">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>`}
+      />
+
+      <ComponentExample
+        title="Toast / Alerts"
+        description="Mensajes de notificación con 4 variantes: Success, Error, Warning, Info."
+        preview={
+          <div className="space-y-4 max-w-2xl">
+            <div className="flex items-start gap-3 bg-[#D4E9D8] border border-[#27933E] rounded-xl p-4">
+              <CheckCircle className="w-5 h-5 text-[#27933E] flex-shrink-0 mt-0.5" />
+              <div className="flex-1">
+                <h5 className="font-bold text-[#27933E] mb-1">Éxito</h5>
+                <p className="text-sm text-gray-700">La operación se completó correctamente.</p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3 bg-[#FFE5E5] border border-[#FF7466] rounded-xl p-4">
+              <AlertCircle className="w-5 h-5 text-[#FF7466] flex-shrink-0 mt-0.5" />
+              <div className="flex-1">
+                <h5 className="font-bold text-[#FF7466] mb-1">Error</h5>
+                <p className="text-sm text-gray-700">Ocurrió un error al procesar la solicitud.</p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3 bg-[#FFF4E5] border border-[#FFA726] rounded-xl p-4">
+              <AlertTriangle className="w-5 h-5 text-[#FFA726] flex-shrink-0 mt-0.5" />
+              <div className="flex-1">
+                <h5 className="font-bold text-[#FFA726] mb-1">Advertencia</h5>
+                <p className="text-sm text-gray-700">Ten cuidado antes de proceder.</p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3 bg-[#E3F2FD] border border-[#2B6BDC] rounded-xl p-4">
+              <Info className="w-5 h-5 text-[#2B6BDC] flex-shrink-0 mt-0.5" />
+              <div className="flex-1">
+                <h5 className="font-bold text-[#2B6BDC] mb-1">Información</h5>
+                <p className="text-sm text-gray-700">Aquí hay información relevante para ti.</p>
+              </div>
+            </div>
+          </div>
+        }
+        code={`<!-- Success -->
+<div class="alert alert--success">
+  <span class="alert__icon">✓</span>
+  <div>
+    <h5 class="alert__title">Éxito</h5>
+    <p class="alert__message">La operación se completó.</p>
+  </div>
+</div>
+
+<!-- Error -->
+<div class="alert alert--error">
+  <span class="alert__icon">✕</span>
+  <div>
+    <h5 class="alert__title">Error</h5>
+    <p class="alert__message">Ocurrió un error.</p>
+  </div>
+</div>
+
+<!-- Warning -->
+<div class="alert alert--warning">
+  <span class="alert__icon">⚠</span>
+  <div>
+    <h5 class="alert__title">Advertencia</h5>
+    <p class="alert__message">Ten cuidado.</p>
+  </div>
+</div>
+
+<!-- Info -->
+<div class="alert alert--info">
+  <span class="alert__icon">ℹ</span>
+  <div>
+    <h5 class="alert__title">Información</h5>
+    <p class="alert__message">Información relevante.</p>
+  </div>
+</div>`}
+      />
+
+      <ComponentExample
+        title="Tooltip"
+        description="Información contextual que aparece al hacer hover."
+        preview={
+          <div className="flex justify-center">
+            <div
+              className="relative inline-block"
+              onMouseEnter={() => setShowTooltip(true)}
+              onMouseLeave={() => setShowTooltip(false)}
+            >
+              <button className="px-6 py-3 bg-[#27933E] text-white rounded-full font-semibold">
+                Pasa el mouse aquí
+              </button>
+              <AnimatePresence>
+                {showTooltip && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-4 py-2 bg-gray-900 text-white text-sm rounded-lg whitespace-nowrap"
+                  >
+                    Este es un tooltip de ayuda
+                    <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-1 w-2 h-2 bg-gray-900 rotate-45"></div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </div>
+        }
+        code={`<div class="tooltip-container">
+  <button class="btn btn--primary">Hover me</button>
+  <div class="tooltip">
+    Este es un tooltip de ayuda
+  </div>
+</div>`}
+      />
+
+      <ComponentExample
+        title="Badge / Tag"
+        description="Etiquetas para estados, categorías y metadatos."
+        preview={
+          <div className="flex flex-wrap gap-3">
+            <span className="px-4 py-2 bg-[#D4E9D8] text-[#27933E] rounded-full text-sm font-semibold">
+              Activo
+            </span>
+            <span className="px-4 py-2 bg-[#E3F2FD] text-[#2B6BDC] rounded-full text-sm font-semibold">
+              Nuevo
+            </span>
+            <span className="px-4 py-2 bg-[#FFF4E5] text-[#FFA726] rounded-full text-sm font-semibold">
+              Pendiente
+            </span>
+            <span className="px-4 py-2 bg-[#FFE5E5] text-[#FF7466] rounded-full text-sm font-semibold">
+              Rechazado
+            </span>
+            <span className="px-4 py-2 bg-gray-200 text-gray-700 rounded-full text-sm font-semibold">
+              Inactivo
+            </span>
+          </div>
+        }
+        code={`<span class="badge badge--success">Activo</span>
+<span class="badge badge--info">Nuevo</span>
+<span class="badge badge--warning">Pendiente</span>
+<span class="badge badge--error">Rechazado</span>
+<span class="badge badge--neutral">Inactivo</span>`}
+      />
+
+      <ComponentExample
+        title="Loader / Spinner"
+        description="Indicador de carga que cambia según la marca seleccionada."
+        preview={
+          <div className="space-y-6">
+            <div className="flex justify-center gap-3">
+              <button
+                onClick={() => setSelectedBrand('seguro')}
+                className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
+                  selectedBrand === 'seguro'
+                    ? 'bg-[#27933E] text-white'
+                    : 'bg-gray-200 text-gray-700'
+                }`}
+              >
+                Seguro
+              </button>
+              <button
+                onClick={() => setSelectedBrand('salud')}
+                className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
+                  selectedBrand === 'salud'
+                    ? 'bg-[#2B6BDC] text-white'
+                    : 'bg-gray-200 text-gray-700'
+                }`}
+              >
+                Salud
+              </button>
+              <button
+                onClick={() => setSelectedBrand('servicios')}
+                className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
+                  selectedBrand === 'servicios'
+                    ? 'bg-[#FFA726] text-white'
+                    : 'bg-gray-200 text-gray-700'
+                }`}
+              >
+                Servicios
+              </button>
+            </div>
+
+            <div className="flex flex-col items-center gap-6 py-8">
+              <Loader2
+                className={`w-12 h-12 animate-spin ${
+                  selectedBrand === 'seguro'
+                    ? 'text-[#27933E]'
+                    : selectedBrand === 'salud'
+                    ? 'text-[#2B6BDC]'
+                    : 'text-[#FFA726]'
+                }`}
+              />
+              <p className="text-sm text-gray-600">Cargando contenido...</p>
+            </div>
+          </div>
+        }
+        code={`<!-- Loader Simple -->
+<div class="loader"></div>
+
+<!-- Con Mensaje -->
+<div class="loader-container">
+  <div class="loader loader--seguro"></div>
+  <p>Cargando contenido...</p>
+</div>
+
+<!-- Variantes por marca -->
+<div class="loader loader--seguro"></div>
+<div class="loader loader--salud"></div>
+<div class="loader loader--servicios"></div>`}
       />
     </div>
   );

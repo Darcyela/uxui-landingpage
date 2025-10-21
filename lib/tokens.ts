@@ -194,7 +194,7 @@ export function getSpacingScale(): SpacingToken[] {
 
 export function generateCSSVariables(): string {
   let css = '/* Generated from tokens/achs-tokens-v2.json — ACHS Design System */\n\n';
-  css += ':root {\n';
+  css += '#achs-ui {\n';
 
   const brandColors = getBrandColors();
   brandColors.forEach((color) => {
@@ -231,211 +231,211 @@ export function generateCSSVariables(): string {
   css += '}\n\n';
 
   css += `/* Base Button Styles */
-.btn {
+#achs-ui .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 24px;
+  padding: 0.75rem 1.5rem;
   border: none;
   border-radius: 9999px;
   font-family: var(--font-body);
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
-.btn--primary {
+#achs-ui .btn--primary {
   background-color: var(--color-brand-brand-seguro-primary);
   color: white;
 }
 
-.btn--primary:hover {
+#achs-ui .btn--primary:hover {
   background-color: var(--color-brand-brand-seguro-secondary);
 }
 
-.btn--primary:disabled {
+#achs-ui .btn--primary:disabled {
   background-color: var(--color-brand-brand-seguro-disable);
   cursor: not-allowed;
 }
 
-.btn--secondary {
+#achs-ui .btn--secondary {
   background-color: var(--color-brand-brand-salud-primary);
   color: white;
 }
 
-.btn--secondary:hover {
+#achs-ui .btn--secondary:hover {
   background-color: var(--color-brand-brand-salud-secondary);
 }
 
-.btn--ghost {
+#achs-ui .btn--ghost {
   background-color: transparent;
   border: 2px solid var(--color-brand-brand-seguro-primary);
   color: var(--color-brand-brand-seguro-primary);
 }
 
-.btn--ghost:hover {
+#achs-ui .btn--ghost:hover {
   background-color: var(--color-brand-brand-seguro-light);
 }
 
-.btn--sm {
-  padding: 8px 16px;
-  font-size: 14px;
+#achs-ui .btn--sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
 }
 
-.btn--lg {
-  padding: 16px 32px;
-  font-size: 18px;
+#achs-ui .btn--lg {
+  padding: 1rem 2rem;
+  font-size: 1.125rem;
 }
 
 /* Card Styles */
-.card {
+#achs-ui .card {
   background: white;
   border-radius: 16px;
-  padding: 24px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  padding: 1.5rem;
+  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.08);
   transition: box-shadow 0.2s ease;
 }
 
-.card:hover {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+#achs-ui .card:hover {
+  box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.12);
 }
 
-.card__header {
-  margin-bottom: 16px;
+#achs-ui .card__header {
+  margin-bottom: 1rem;
   font-family: var(--font-heading);
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 500;
   color: var(--color-text-titleDark);
 }
 
-.card__body {
+#achs-ui .card__body {
   color: var(--color-text-paragraph);
   line-height: 1.6;
 }
 
 /* Table Styles */
-.table {
+#achs-ui .table {
   width: 100%;
   border-collapse: collapse;
-  border-radius: 12px;
+  border-radius: 0.75rem;
   overflow: hidden;
 }
 
-.table th {
+#achs-ui .table th {
   background-color: #f3f4f6;
-  padding: 12px 16px;
+  padding: 0.75rem 1rem;
   text-align: left;
   font-family: var(--font-heading);
   font-weight: 500;
   color: var(--color-text-titleDark);
 }
 
-.table td {
-  padding: 12px 16px;
+#achs-ui .table td {
+  padding: 0.75rem 1rem;
   border-bottom: 1px solid #e5e7eb;
   color: var(--color-text-paragraph);
 }
 
-.table tr:hover td {
+#achs-ui .table tr:hover td {
   background-color: #f9fafb;
 }
 
 /* Tabs Styles */
-.tabs {
+#achs-ui .tabs {
   display: flex;
-  gap: 8px;
+  gap: 0.5rem;
   border-bottom: 2px solid #e5e7eb;
 }
 
-.tabs__item {
-  padding: 12px 24px;
+#achs-ui .tabs__item {
+  padding: 0.75rem 1.5rem;
   background: transparent;
   border: none;
   border-bottom: 3px solid transparent;
   font-family: var(--font-body);
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 500;
   color: var(--color-text-paragraphLight);
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
-.tabs__item--active {
+#achs-ui .tabs__item--active {
   color: var(--color-brand-brand-seguro-primary);
   border-bottom-color: var(--color-brand-brand-seguro-primary);
 }
 
-.tabs__item:hover {
+#achs-ui .tabs__item:hover {
   color: var(--color-brand-brand-seguro-primary);
 }
 
 /* Form Styles */
-.form-field {
-  margin-bottom: 20px;
+#achs-ui .form-field {
+  margin-bottom: 1.25rem;
 }
 
-.form-field__label {
+#achs-ui .form-field__label {
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 0.5rem;
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 600;
   color: var(--color-text-titleDark);
 }
 
-.form-field__input {
+#achs-ui .form-field__input {
   width: 100%;
-  padding: 12px 16px;
+  padding: 0.75rem 1rem;
   border: 2px solid #e5e7eb;
-  border-radius: 8px;
+  border-radius: 0.5rem;
   font-family: var(--font-body);
-  font-size: 16px;
+  font-size: 1rem;
   color: var(--color-text-base);
   transition: border-color 0.2s ease;
 }
 
-.form-field__input:focus {
+#achs-ui .form-field__input:focus {
   outline: none;
   border-color: var(--color-brand-brand-seguro-primary);
 }
 
-.form-field__input--error {
+#achs-ui .form-field__input--error {
   border-color: var(--color-semantic-semantic-negative-dark);
 }
 
-.form-field__helper {
-  margin-top: 6px;
-  font-size: 12px;
+#achs-ui .form-field__helper {
+  margin-top: 0.375rem;
+  font-size: 0.75rem;
   color: var(--color-text-paragraphLight);
 }
 
-.form-field__error {
-  margin-top: 6px;
-  font-size: 12px;
+#achs-ui .form-field__error {
+  margin-top: 0.375rem;
+  font-size: 0.75rem;
   color: var(--color-semantic-semantic-negative-dark);
 }
 
 /* Badge Styles */
-.badge {
+#achs-ui .badge {
   display: inline-block;
-  padding: 4px 12px;
-  border-radius: 16px;
-  font-size: 12px;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
   font-weight: 600;
 }
 
-.badge--success {
+#achs-ui .badge--success {
   background-color: var(--color-semantic-semantic-positive-light);
   color: var(--color-semantic-semantic-positive-dark);
 }
 
-.badge--warning {
+#achs-ui .badge--warning {
   background-color: var(--color-semantic-semantic-warning-light);
   color: var(--color-semantic-semantic-warning-dark);
 }
 
-.badge--error {
+#achs-ui .badge--error {
   background-color: var(--color-semantic-semantic-negative-light);
   color: var(--color-semantic-semantic-negative-dark);
 }

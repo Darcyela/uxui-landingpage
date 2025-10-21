@@ -96,13 +96,31 @@ export default function RequestFab() {
 
   return (
     <>
+      <style jsx>{`
+        @keyframes heartbeat {
+          0%, 100% {
+            transform: scale(1);
+          }
+          10%, 30% {
+            transform: scale(1.05);
+          }
+          20%, 40% {
+            transform: scale(1);
+          }
+        }
+
+        .heartbeat-animation {
+          animation: heartbeat 2s ease-in-out infinite;
+        }
+      `}</style>
+
       <button
         aria-label="Solicitar apoyo del equipo UX"
         onClick={() => setOpen(true)}
-        className="fixed bottom-6 right-6 md:bottom-[72px] md:right-[72px] z-50 rounded-full bg-gradient-to-br from-[#00A859] to-[#8CC63F] text-white shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200 flex items-center justify-center gap-2 px-5 py-3.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#00A859]"
+        className="heartbeat-animation fixed bottom-8 right-8 md:bottom-12 md:right-12 z-50 rounded-full bg-gradient-to-br from-[#00A859] to-[#8CC63F] text-white shadow-2xl hover:shadow-3xl hover:scale-110 transition-all duration-300 flex items-center justify-center gap-3 px-8 py-5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-offset-2 focus-visible:ring-[#00A859]"
       >
-        <Sparkles className="w-5 h-5" />
-        <span className="text-sm font-semibold whitespace-nowrap">
+        <Sparkles className="w-6 h-6" />
+        <span className="text-base font-bold whitespace-nowrap">
           Solicitar apoyo del equipo UX
         </span>
       </button>
