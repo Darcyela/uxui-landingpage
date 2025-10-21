@@ -31,7 +31,7 @@ const navigationCards = [
     icon: Palette,
     href: '/sistema-de-diseno',
     gradient: 'from-[#8CC63F] to-[#00A859]',
-    available: false,
+    available: true,
   },
   {
     title: 'Testing',
