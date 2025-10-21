@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { TypographyToken } from '@/lib/tokens';
+import { Download } from 'lucide-react';
 
 interface TokensTypographyScaleProps {
   mobileTypography: TypographyToken[];
@@ -20,27 +21,36 @@ export default function TokensTypographyScale({
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h3 className="text-2xl font-bold text-gray-900">Tipografías</h3>
-        <div className="flex bg-gray-100 rounded-lg p-1">
+        <div className="flex items-center gap-3">
           <button
-            onClick={() => setActiveView('mobile')}
-            className={`px-4 py-2 rounded-md text-sm font-semibold transition-all ${
-              activeView === 'mobile'
-                ? 'bg-white text-[#27933E] shadow-sm'
-                : 'text-gray-600 hover:text-gray-900'
-            }`}
+            onClick={() => {}}
+            className="w-10 h-10 rounded-full bg-[#27933E] hover:bg-[#1f7230] transition-all flex items-center justify-center shadow-md hover:shadow-lg group"
+            aria-label="Descargar tipografía"
           >
-            Móvil
+            <Download className="w-5 h-5 text-white group-hover:scale-110 transition-transform" />
           </button>
-          <button
-            onClick={() => setActiveView('desktop')}
-            className={`px-4 py-2 rounded-md text-sm font-semibold transition-all ${
-              activeView === 'desktop'
-                ? 'bg-white text-[#27933E] shadow-sm'
-                : 'text-gray-600 hover:text-gray-900'
-            }`}
-          >
-            Escritorio
-          </button>
+          <div className="flex bg-gray-100 rounded-lg p-1">
+            <button
+              onClick={() => setActiveView('mobile')}
+              className={`px-4 py-2 rounded-md text-sm font-semibold transition-all ${
+                activeView === 'mobile'
+                  ? 'bg-white text-[#27933E] shadow-sm'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              Móvil
+            </button>
+            <button
+              onClick={() => setActiveView('desktop')}
+              className={`px-4 py-2 rounded-md text-sm font-semibold transition-all ${
+                activeView === 'desktop'
+                  ? 'bg-white text-[#27933E] shadow-sm'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              Escritorio
+            </button>
+          </div>
         </div>
       </div>
 
