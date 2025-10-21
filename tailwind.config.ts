@@ -10,7 +10,7 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        'serif': ['ACHS Serif', 'serif'],
+        'heading': ['Montserrat', 'sans-serif'],
         'sans': ['ACHS Sans', 'system-ui', '-apple-system', 'sans-serif'],
       },
       backgroundImage: {

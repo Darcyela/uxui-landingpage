@@ -2,13 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: 'ACHS Serif';
-  src: url('https://storage.googleapis.com/mi-tipografia-bucket/ACHSNuevaSerif-Medium.ttf') format('truetype');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 
 @font-face {
   font-family: 'ACHS Sans';
@@ -36,8 +30,8 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'ACHS Serif', serif;
-  font-weight: 500;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
 }
 
 @layer base {
