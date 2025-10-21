@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'ACHS Serif';
+  src: url('https://storage.googleapis.com/mi-tipografia-bucket/ACHSNuevaSerif-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ACHS Sans';
+  src: url('https://storage.googleapis.com/mi-tipografia-bucket/ACHSNuevaSans-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --achs-green-primary: #00A859;
   --achs-green-secondary: #8CC63F;
@@ -14,8 +30,14 @@
 }
 
 body {
+  font-family: 'ACHS Sans', system-ui, -apple-system, sans-serif;
   font-feature-settings: 'cv11', 'ss01';
   font-variation-settings: 'opsz' 32;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'ACHS Serif', serif;
+  font-weight: 500;
 }
 
 @layer base {
