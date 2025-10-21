@@ -36,7 +36,7 @@ export default function TokensSpacingRadius({ spacing }: TokensSpacingRadiusProp
                     <p className="text-sm text-gray-500 font-mono">{space.value}</p>
                   </div>
                 </div>
-                <div className="bg-gradient-to-r from-[#27933E] to-[#2B6BDC] rounded-lg" style={{ height: space.value, maxHeight: '80px' }} />
+                <div className="bg-gray-400 rounded-lg" style={{ height: space.value, maxHeight: '80px' }} />
               </div>
             </motion.div>
           ))}
@@ -61,7 +61,7 @@ export default function TokensSpacingRadius({ spacing }: TokensSpacingRadiusProp
                   <p className="text-sm text-gray-500 font-mono">{radius.value}</p>
                 </div>
                 <div
-                  className="bg-gradient-to-br from-[#27933E] to-[#2B6BDC] h-24"
+                  className="bg-gray-400 h-24"
                   style={{ borderRadius: radius.value }}
                 />
               </div>
