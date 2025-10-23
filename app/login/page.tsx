@@ -43,12 +43,11 @@ export default function LoginPage() {
         className="w-full max-w-md relative z-10"
       >
         <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100">
-          <div className="bg-gradient-to-r from-[#27933E] to-[#13C045] px-8 py-6 text-center">
-            <h1 className="text-2xl font-bold text-white mb-1">Plataforma UX + IA</h1>
-            <p className="text-white/90 text-sm">Ingresa para continuar</p>
-          </div>
-
-          <div className="p-8">
+          <div className="p-8 pt-12">
+            <div className="text-center mb-8">
+              <h1 className="text-3xl font-bold text-[#27933E] mb-2">Plataforma UX + IA</h1>
+              <p className="text-gray-600 text-sm">Ingresa para continuar</p>
+            </div>
             {error && (
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
@@ -100,7 +99,7 @@ export default function LoginPage() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full py-4 bg-gradient-to-r from-[#27933E] to-[#13C045] text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all hover:scale-[1.02] disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2"
+                className="w-full py-4 bg-[#27933E] text-white font-semibold rounded-xl shadow-lg hover:bg-[#13C045] transition-all hover:scale-[1.02] disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2"
               >
                 {isLoading ? (
                   <>

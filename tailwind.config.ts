@@ -10,8 +10,7 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        'heading': ['Montserrat', 'sans-serif'],
-        'sans': ['ACHS Sans', 'system-ui', '-apple-system', 'sans-serif'],
+        'sans': ['ACHSNuevaSans', 'system-ui', '-apple-system', 'sans-serif'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
