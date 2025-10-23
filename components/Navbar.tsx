@@ -18,6 +18,10 @@ export default function Navbar() {
   const pathname = usePathname();
   const { user, logout } = useAuth();
 
+  if (pathname === '/login') {
+    return null;
+  }
+
   return (
     <motion.nav
       initial={{ y: -20, opacity: 0 }}

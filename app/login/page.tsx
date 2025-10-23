@@ -4,10 +4,11 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { LogIn, Mail, Lock, AlertCircle, Loader2 } from 'lucide-react';
-import Image from 'next/image';
+import { useAuth } from '@/lib/auth-context';
 
 export default function LoginPage() {
   const router = useRouter();
+  const { login } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -18,22 +19,14 @@ export default function LoginPage() {
     setError('');
     setIsLoading(true);
 
-    try {
+    setTimeout(() => {
       if (email === 'admin@achs.cl' && password === 'ACHS2024!') {
-        localStorage.setItem('isAuthenticated', 'true');
-        localStorage.setItem('userEmail', email);
-        localStorage.setItem('userName', 'Administrador ACHS');
-        localStorage.setItem('userRole', 'admin');
-
-        router.push('/');
+        login(email, 'Administrador ACHS', 'admin');
       } else {
         setError('Credenciales incorrectas. Por favor verifica tu correo y contraseña.');
+        setIsLoading(false);
       }
-    } catch (err) {
-      setError('Ocurrió un error al iniciar sesión. Por favor intenta nuevamente.');
-    } finally {
-      setIsLoading(false);
-    }
+    }, 500);
   };
 
   return (
@@ -50,17 +43,9 @@ export default function LoginPage() {
         className="w-full max-w-md relative z-10"
       >
         <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100">
-          <div className="bg-gradient-to-r from-[#27933E] to-[#13C045] p-8 text-center">
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
-              className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg"
-            >
-              <LogIn className="w-10 h-10 text-[#27933E]" />
-            </motion.div>
-            <h1 className="text-3xl font-bold text-white mb-2">Plataforma UX + IA</h1>
-            <p className="text-white/90 text-sm">Ingresa tus credenciales para continuar</p>
+          <div className="bg-gradient-to-r from-[#27933E] to-[#13C045] px-8 py-6 text-center">
+            <h1 className="text-2xl font-bold text-white mb-1">Plataforma UX + IA</h1>
+            <p className="text-white/90 text-sm">Ingresa para continuar</p>
           </div>
 
           <div className="p-8">
