@@ -4,6 +4,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
+import { LogOut, User } from 'lucide-react';
+import { useAuth } from '@/lib/auth-context';
 
 const navItems = [
   { name: 'Inicio', href: '/' },
@@ -14,6 +16,7 @@ const navItems = [
 
 export default function Navbar() {
   const pathname = usePathname();
+  const { user, logout } = useAuth();
 
   return (
     <motion.nav
@@ -35,26 +38,45 @@ export default function Navbar() {
             </div>
           </Link>
 
-          <div className="flex items-center space-x-1 sm:space-x-2">
-            {navItems.map((item) => {
-              const isActive = pathname === item.href;
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="relative px-3 py-2 text-sm font-medium text-gray-700 hover:text-[#0097D7] transition-colors"
+          <div className="flex items-center gap-4">
+            <div className="flex items-center space-x-1 sm:space-x-2">
+              {navItems.map((item) => {
+                const isActive = pathname === item.href;
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="relative px-3 py-2 text-sm font-medium text-gray-700 hover:text-[#0097D7] transition-colors"
+                  >
+                    {item.name}
+                    {isActive && (
+                      <motion.div
+                        layoutId="navbar-indicator"
+                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#0097D7]"
+                        transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                      />
+                    )}
+                  </Link>
+                );
+              })}
+            </div>
+
+            {user && (
+              <div className="flex items-center gap-3 pl-3 border-l border-gray-200">
+                <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-gray-100 rounded-lg">
+                  <User className="w-4 h-4 text-gray-600" />
+                  <span className="text-xs font-medium text-gray-700">{user.name}</span>
+                </div>
+                <button
+                  onClick={logout}
+                  className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                  title="Cerrar sesión"
                 >
-                  {item.name}
-                  {isActive && (
-                    <motion.div
-                      layoutId="navbar-indicator"
-                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#0097D7]"
-                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                    />
-                  )}
-                </Link>
-              );
-            })}
+                  <LogOut className="w-4 h-4" />
+                  <span className="hidden sm:inline">Salir</span>
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>

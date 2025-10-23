@@ -74,78 +74,132 @@ export default function ComponentGallery() {
   return (
     <div className="space-y-8">
       <ComponentExample
-        title="Layout Base"
-        description="Estructura general con Header, Sidebar, Main y Footer. Cambia entre Desktop y Mobile."
-        preview={<LayoutExample />}
-        code={`<div class="layout">
-  <header class="layout__header">
-    <button class="menu-toggle">☰</button>
-    <h2>ACHS App</h2>
-    <div class="user-avatar"></div>
-  </header>
-
-  <div class="layout__body">
-    <aside class="layout__sidebar">
-      <nav>
-        <a href="#" class="nav-item nav-item--active">Inicio</a>
-        <a href="#" class="nav-item">Usuarios</a>
-        <a href="#" class="nav-item">Documentos</a>
-      </nav>
-    </aside>
-
-    <main class="layout__main">
-      <h3>Contenido Principal</h3>
-      <!-- Contenido aquí -->
-    </main>
-  </div>
-
-  <footer class="layout__footer">
-    © 2025 ACHS
-  </footer>
-</div>`}
-      />
-      <ComponentExample
         title="Botones"
-        description="Variantes de botones con diferentes estilos, tamaños y estados."
+        description="Variantes de botones con diferentes estilos y todos los tamaños disponibles."
         preview={
-          <div className="flex flex-wrap gap-4">
-            <button className="px-6 py-3 bg-[#27933E] text-white rounded-full font-semibold hover:bg-[#13C045] transition-colors shadow-md">
-              Primario
-            </button>
-            <button className="px-6 py-3 bg-[#2B6BDC] text-white rounded-full font-semibold hover:bg-[#348FFF] transition-colors shadow-md">
-              Secundario
-            </button>
-            <button className="px-6 py-3 bg-transparent border-2 border-[#27933E] text-[#27933E] rounded-full font-semibold hover:bg-[#CCF1DC] transition-colors">
-              Ghost
-            </button>
-            <button className="px-4 py-2 bg-[#27933E] text-white rounded-full text-sm font-semibold hover:bg-[#13C045] transition-colors">
-              Pequeño
-            </button>
-            <button className="px-8 py-4 bg-[#27933E] text-white rounded-full text-lg font-semibold hover:bg-[#13C045] transition-colors shadow-lg">
-              Grande
-            </button>
-            <button className="px-6 py-3 bg-[#66D495] text-white rounded-full font-semibold cursor-not-allowed opacity-60" disabled>
-              Deshabilitado
-            </button>
+          <div className="space-y-8">
+            <div>
+              <h5 className="text-sm font-bold text-gray-700 mb-4">Botones Primarios - Todos los Tamaños</h5>
+              <div className="flex flex-wrap items-center gap-3">
+                <button className="px-2 py-1 bg-[#27933E] text-white rounded-full text-xs font-semibold hover:bg-[#13C045] transition-colors">
+                  XS - Primario
+                </button>
+                <button className="px-3 py-1.5 bg-[#27933E] text-white rounded-full text-sm font-semibold hover:bg-[#13C045] transition-colors">
+                  S - Primario
+                </button>
+                <button className="px-4 py-2 bg-[#27933E] text-white rounded-full text-sm font-semibold hover:bg-[#13C045] transition-colors">
+                  M - Primario
+                </button>
+                <button className="px-6 py-3 bg-[#27933E] text-white rounded-full text-base font-semibold hover:bg-[#13C045] transition-colors shadow-md">
+                  L - Primario
+                </button>
+                <button className="px-8 py-4 bg-[#27933E] text-white rounded-full text-lg font-semibold hover:bg-[#13C045] transition-colors shadow-lg">
+                  XL - Primario
+                </button>
+                <button className="px-10 py-5 bg-[#27933E] text-white rounded-full text-xl font-semibold hover:bg-[#13C045] transition-colors shadow-xl">
+                  XXL - Primario
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <h5 className="text-sm font-bold text-gray-700 mb-4">Botones Secundarios - Todos los Tamaños</h5>
+              <div className="flex flex-wrap items-center gap-3">
+                <button className="px-2 py-1 bg-[#2B6BDC] text-white rounded-full text-xs font-semibold hover:bg-[#348FFF] transition-colors">
+                  XS - Secundario
+                </button>
+                <button className="px-3 py-1.5 bg-[#2B6BDC] text-white rounded-full text-sm font-semibold hover:bg-[#348FFF] transition-colors">
+                  S - Secundario
+                </button>
+                <button className="px-4 py-2 bg-[#2B6BDC] text-white rounded-full text-sm font-semibold hover:bg-[#348FFF] transition-colors">
+                  M - Secundario
+                </button>
+                <button className="px-6 py-3 bg-[#2B6BDC] text-white rounded-full text-base font-semibold hover:bg-[#348FFF] transition-colors shadow-md">
+                  L - Secundario
+                </button>
+                <button className="px-8 py-4 bg-[#2B6BDC] text-white rounded-full text-lg font-semibold hover:bg-[#348FFF] transition-colors shadow-lg">
+                  XL - Secundario
+                </button>
+                <button className="px-10 py-5 bg-[#2B6BDC] text-white rounded-full text-xl font-semibold hover:bg-[#348FFF] transition-colors shadow-xl">
+                  XXL - Secundario
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <h5 className="text-sm font-bold text-gray-700 mb-4">Botones Ghost - Todos los Tamaños</h5>
+              <div className="flex flex-wrap items-center gap-3">
+                <button className="px-2 py-1 bg-transparent border border-[#27933E] text-[#27933E] rounded-full text-xs font-semibold hover:bg-[#CCF1DC] transition-colors">
+                  XS - Ghost
+                </button>
+                <button className="px-3 py-1.5 bg-transparent border border-[#27933E] text-[#27933E] rounded-full text-sm font-semibold hover:bg-[#CCF1DC] transition-colors">
+                  S - Ghost
+                </button>
+                <button className="px-4 py-2 bg-transparent border-2 border-[#27933E] text-[#27933E] rounded-full text-sm font-semibold hover:bg-[#CCF1DC] transition-colors">
+                  M - Ghost
+                </button>
+                <button className="px-6 py-3 bg-transparent border-2 border-[#27933E] text-[#27933E] rounded-full text-base font-semibold hover:bg-[#CCF1DC] transition-colors">
+                  L - Ghost
+                </button>
+                <button className="px-8 py-4 bg-transparent border-2 border-[#27933E] text-[#27933E] rounded-full text-lg font-semibold hover:bg-[#CCF1DC] transition-colors">
+                  XL - Ghost
+                </button>
+                <button className="px-10 py-5 bg-transparent border-2 border-[#27933E] text-[#27933E] rounded-full text-xl font-semibold hover:bg-[#CCF1DC] transition-colors">
+                  XXL - Ghost
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <h5 className="text-sm font-bold text-gray-700 mb-4">Estados Especiales</h5>
+              <div className="flex flex-wrap items-center gap-3">
+                <button className="px-6 py-3 bg-[#66D495] text-white rounded-full font-semibold cursor-not-allowed opacity-60" disabled>
+                  Deshabilitado
+                </button>
+                <button className="px-6 py-3 bg-[#FF7466] text-white rounded-full font-semibold hover:bg-[#FF5A4D] transition-colors shadow-md">
+                  Peligro
+                </button>
+                <button className="px-6 py-3 bg-[#FFA726] text-white rounded-full font-semibold hover:bg-[#FF9800] transition-colors shadow-md">
+                  Advertencia
+                </button>
+              </div>
+            </div>
           </div>
         }
-        code={`<!-- Botón Primario -->
-<button class="btn btn--primary">Primario</button>
+        code={`<!-- Tamaño XS -->
+<button class="btn btn--primary btn--xs">XS - Primario</button>
+<button class="btn btn--secondary btn--xs">XS - Secundario</button>
+<button class="btn btn--ghost btn--xs">XS - Ghost</button>
 
-<!-- Botón Secundario -->
-<button class="btn btn--secondary">Secundario</button>
+<!-- Tamaño S -->
+<button class="btn btn--primary btn--s">S - Primario</button>
+<button class="btn btn--secondary btn--s">S - Secundario</button>
+<button class="btn btn--ghost btn--s">S - Ghost</button>
 
-<!-- Botón Ghost -->
-<button class="btn btn--ghost">Ghost</button>
+<!-- Tamaño M (por defecto) -->
+<button class="btn btn--primary">M - Primario</button>
+<button class="btn btn--secondary">M - Secundario</button>
+<button class="btn btn--ghost">M - Ghost</button>
 
-<!-- Botón Pequeño -->
-<button class="btn btn--primary btn--sm">Pequeño</button>
+<!-- Tamaño L -->
+<button class="btn btn--primary btn--l">L - Primario</button>
+<button class="btn btn--secondary btn--l">L - Secundario</button>
+<button class="btn btn--ghost btn--l">L - Ghost</button>
 
-<!-- Botón Grande -->
-<button class="btn btn--primary btn--lg">Grande</button>
+<!-- Tamaño XL -->
+<button class="btn btn--primary btn--xl">XL - Primario</button>
+<button class="btn btn--secondary btn--xl">XL - Secundario</button>
+<button class="btn btn--ghost btn--xl">XL - Ghost</button>
 
-<!-- Botón Deshabilitado -->
-<button class="btn btn--primary" disabled>Deshabilitado</button>`}
+<!-- Tamaño XXL -->
+<button class="btn btn--primary btn--xxl">XXL - Primario</button>
+<button class="btn btn--secondary btn--xxl">XXL - Secundario</button>
+<button class="btn btn--ghost btn--xxl">XXL - Ghost</button>
+
+<!-- Estados Especiales -->
+<button class="btn btn--primary" disabled>Deshabilitado</button>
+<button class="btn btn--danger">Peligro</button>
+<button class="btn btn--warning">Advertencia</button>`}
       />
 
       <ComponentExample
@@ -615,7 +669,7 @@ export default function ComponentGallery() {
                 onClick={() => setSelectedBrand('servicios')}
                 className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
                   selectedBrand === 'servicios'
-                    ? 'bg-[#FFA726] text-white'
+                    ? 'bg-[#4B4196] text-white'
                     : 'bg-gray-200 text-gray-700'
                 }`}
               >
@@ -630,7 +684,7 @@ export default function ComponentGallery() {
                     ? 'text-[#27933E]'
                     : selectedBrand === 'salud'
                     ? 'text-[#2B6BDC]'
-                    : 'text-[#FFA726]'
+                    : 'text-[#4B4196]'
                 }`}
               />
               <p className="text-sm text-gray-600">Cargando contenido...</p>

@@ -10,6 +10,8 @@ import TokensTypographyScale from '@/components/design-system/TokensTypographySc
 import TokensSpacingRadius from '@/components/design-system/TokensSpacingRadius';
 import ComponentGallery from '@/components/design-system/ComponentGallery';
 import DownloadStylesButton from '@/components/design-system/DownloadStylesButton';
+import LayoutExample from '@/components/design-system/LayoutExample';
+import BreakpointsGrid from '@/components/design-system/BreakpointsGrid';
 import {
   getSeguroColors,
   getSaludColors,
@@ -23,7 +25,7 @@ import {
 
 const FIGMA_URL = 'https://www.figma.com/design/sistema-achs';
 
-type TokenTab = 'colores' | 'tipografia' | 'espaciado' | 'componentes';
+type TokenTab = 'colores' | 'tipografia' | 'espaciado' | 'componentes' | 'layout' | 'breakpoints';
 type MainTab = 'tokens' | 'stack' | 'documentacion';
 
 export default function SistemaDiseno() {
@@ -212,6 +214,26 @@ export default function SistemaDiseno() {
                   >
                     Componentes
                   </button>
+                  <button
+                    onClick={() => setActiveTokenTab('layout')}
+                    className={`px-6 py-3 rounded-lg text-sm font-semibold transition-all ${
+                      activeTokenTab === 'layout'
+                        ? 'bg-white text-[#27933E] shadow-md'
+                        : 'text-gray-600 hover:text-gray-900'
+                    }`}
+                  >
+                    Layout
+                  </button>
+                  <button
+                    onClick={() => setActiveTokenTab('breakpoints')}
+                    className={`px-6 py-3 rounded-lg text-sm font-semibold transition-all ${
+                      activeTokenTab === 'breakpoints'
+                        ? 'bg-white text-[#27933E] shadow-md'
+                        : 'text-gray-600 hover:text-gray-900'
+                    }`}
+                  >
+                    Breakpoints
+                  </button>
                 </div>
               </div>
 
@@ -246,6 +268,20 @@ export default function SistemaDiseno() {
 
                 {activeTokenTab === 'componentes' && (
                   <ComponentGallery />
+                )}
+
+                {activeTokenTab === 'layout' && (
+                  <div className="bg-gradient-to-br from-white to-gray-50 rounded-2xl p-8 shadow-lg border border-gray-200">
+                    <h3 className="text-2xl font-bold text-[#27933E] mb-6">Layout Base</h3>
+                    <p className="text-gray-600 mb-8 leading-relaxed">
+                      Estructura general con Header, Sidebar, Main y Footer. Cambia entre Desktop y Mobile para ver el comportamiento responsive.
+                    </p>
+                    <LayoutExample />
+                  </div>
+                )}
+
+                {activeTokenTab === 'breakpoints' && (
+                  <BreakpointsGrid />
                 )}
               </motion.div>
             </div>
