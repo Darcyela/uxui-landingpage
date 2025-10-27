@@ -4,13 +4,29 @@ import { useState } from 'react';
 import { ChevronDown, X, CheckCircle, AlertCircle, Info, AlertTriangle, Loader2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import CodeBlock from './CodeBlock';
+import MultiCodeBlock from './MultiCodeBlock';
 import LayoutExample from './LayoutExample';
+import AccordionDemo from './AccordionDemo';
+import CarouselDemo from './CarouselDemo';
+import StepperDemo from './StepperDemo';
+import CardsDemo from './CardsDemo';
 
 interface ComponentExampleProps {
   title: string;
   description: string;
   preview: React.ReactNode;
   code: string;
+}
+
+interface MultiCodeExampleProps {
+  title: string;
+  description: string;
+  preview: React.ReactNode;
+  snippets: {
+    html: string;
+    tailwind: string;
+    react: string;
+  };
 }
 
 function ComponentExample({ title, description, preview, code }: ComponentExampleProps) {
@@ -64,6 +80,59 @@ function ComponentExample({ title, description, preview, code }: ComponentExampl
   );
 }
 
+function MultiCodeExample({ title, description, preview, snippets }: MultiCodeExampleProps) {
+  const [showCode, setShowCode] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100"
+    >
+      <div className="p-6 border-b border-gray-100">
+        <h4 className="text-xl font-bold text-gray-900 mb-2">{title}</h4>
+        <p className="text-gray-600 text-sm">{description}</p>
+      </div>
+
+      <div className="p-8 bg-gradient-to-br from-gray-50 to-gray-100">
+        <div id="achs-ui">
+          {preview}
+        </div>
+      </div>
+
+      <div className="p-4 border-t border-gray-100">
+        <button
+          onClick={() => setShowCode(!showCode)}
+          className="flex items-center justify-between w-full px-4 py-2 text-sm font-semibold text-[#27933E] hover:bg-gray-50 rounded-lg transition-colors"
+        >
+          <span>{showCode ? 'Ocultar código' : 'Ver código'}</span>
+          <motion.div
+            animate={{ rotate: showCode ? 180 : 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            <ChevronDown className="w-5 h-5" />
+          </motion.div>
+        </button>
+
+        <AnimatePresence>
+          {showCode && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="mt-4 overflow-hidden"
+            >
+              <MultiCodeBlock snippets={snippets} />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </motion.div>
+  );
+}
+
 export default function ComponentGallery() {
   const [activeTab, setActiveTab] = useState(0);
   const [selectedRow, setSelectedRow] = useState<number | null>(null);
@@ -73,6 +142,549 @@ export default function ComponentGallery() {
 
   return (
     <div className="space-y-8">
+      <MultiCodeExample
+        title="Acordeones"
+        description="Acordeones interactivos con animación suave y accesibilidad integrada."
+        preview={<AccordionDemo />}
+        snippets={{
+          html: `<!-- Acordeón Accesible -->
+<div class="accordion">
+  <div class="accordion-item">
+    <button
+      aria-expanded="true"
+      aria-controls="panel-1"
+      class="accordion-button"
+    >
+      Título 1
+      <span class="accordion-icon">▼</span>
+    </button>
+    <div id="panel-1" role="region" class="accordion-panel">
+      <p>Contenido del primer acordeón.</p>
+    </div>
+  </div>
+
+  <div class="accordion-item">
+    <button
+      aria-expanded="false"
+      aria-controls="panel-2"
+      class="accordion-button"
+    >
+      Título 2
+      <span class="accordion-icon">▼</span>
+    </button>
+    <div id="panel-2" role="region" class="accordion-panel hidden">
+      <p>Contenido del segundo acordeón.</p>
+    </div>
+  </div>
+</div>`,
+          tailwind: `<!-- Acordeón con Tailwind -->
+<div class="bg-white rounded-xl shadow-md overflow-hidden">
+  <div class="border-b border-gray-200">
+    <button
+      aria-expanded="true"
+      aria-controls="panel-1"
+      class="w-full flex items-center justify-between px-6 py-4 text-left hover:bg-gray-50 transition-colors"
+    >
+      <span class="text-base font-semibold text-gray-900">Título 1</span>
+      <svg class="w-5 h-5 text-green-600 transform rotate-180 transition-transform" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M7 10l5 5 5-5z"/>
+      </svg>
+    </button>
+    <div id="panel-1" role="region" class="px-6 pb-4 text-gray-700">
+      Contenido del primer acordeón con espaciado consistente.
+    </div>
+  </div>
+</div>
+
+<style>
+  .accordion-button[aria-expanded="false"] svg {
+    transform: rotate(0deg);
+  }
+</style>`,
+          react: `import { useState } from 'react';
+import { ChevronDown } from 'lucide-react';
+
+export default function Accordion() {
+  const [openIndex, setOpenIndex] = useState(0);
+
+  const items = [
+    { title: 'Título 1', content: 'Contenido 1' },
+    { title: 'Título 2', content: 'Contenido 2' },
+    { title: 'Título 3', content: 'Contenido 3' },
+  ];
+
+  return (
+    <div className="bg-white rounded-xl shadow-md overflow-hidden">
+      {items.map((item, idx) => (
+        <div key={idx} className="border-b border-gray-200">
+          <button
+            onClick={() => setOpenIndex(idx === openIndex ? null : idx)}
+            aria-expanded={openIndex === idx}
+            className="w-full flex items-center justify-between px-6 py-4"
+          >
+            <span className="font-semibold">{item.title}</span>
+            <ChevronDown
+              className={\`w-5 h-5 transition-transform \${
+                openIndex === idx ? 'rotate-180' : ''
+              }\`}
+            />
+          </button>
+          {openIndex === idx && (
+            <div className="px-6 pb-4">{item.content}</div>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}`
+        }}
+      />
+
+      <MultiCodeExample
+        title="Carrusel de Imágenes"
+        description="Banner carrusel con título, contexto y botones de acción. Versión desktop panorámica y mobile vertical."
+        preview={
+          <div className="space-y-8">
+            <div>
+              <h5 className="text-sm font-bold text-gray-700 mb-4">Versión Desktop</h5>
+              <CarouselDemo isMobile={false} />
+            </div>
+            <div>
+              <h5 className="text-sm font-bold text-gray-700 mb-4">Versión Mobile</h5>
+              <CarouselDemo isMobile={true} />
+            </div>
+          </div>
+        }
+        snippets={{
+          html: `<!-- Carrusel Desktop -->
+<div class="carousel carousel--desktop">
+  <div class="carousel-slide">
+    <img src="imagen.jpg" alt="Banner" />
+    <div class="carousel-overlay">
+      <div class="carousel-content">
+        <h2>Título de máximo 41 caracteres</h2>
+        <p>Contexto del banner de máximo 112 caracteres</p>
+        <div class="carousel-actions">
+          <button class="btn btn--primary">Call to action principal</button>
+          <button class="btn btn--secondary">Call to action secundario</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button aria-label="Anterior" class="carousel-control left">←</button>
+  <button aria-label="Siguiente" class="carousel-control right">→</button>
+</div>
+
+<!-- Carrusel Mobile -->
+<div class="carousel carousel--mobile">
+  <div class="carousel-slide">
+    <img src="imagen.jpg" alt="Banner" />
+    <div class="carousel-overlay">
+      <div class="carousel-content">
+        <h3>Título de máximo 41 caracteres</h3>
+        <p>Contexto del banner de máximo 112 caracteres</p>
+        <button class="btn btn--primary">Call to action principal</button>
+        <button class="btn btn--secondary">Call to action secundario</button>
+        <div class="carousel-controls">
+          <button aria-label="Anterior">←</button>
+          <button aria-label="Siguiente">→</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>`,
+          tailwind: `<!-- Carrusel Desktop con Tailwind -->
+<div class="relative max-w-6xl mx-auto">
+  <div class="relative overflow-hidden rounded-2xl shadow-xl aspect-[21/9]">
+    <img src="imagen.jpg" alt="Banner" class="w-full h-full object-cover" />
+    <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+
+    <div class="absolute inset-y-0 left-0 flex items-center max-w-xl">
+      <div class="p-12 space-y-4">
+        <h2 class="text-white text-4xl font-bold leading-tight">
+          Título de máximo 41 caracteres
+        </h2>
+        <p class="text-white/90 text-base leading-relaxed">
+          Contexto del banner de máximo 112 caracteres
+        </p>
+        <div class="flex gap-4 pt-4">
+          <button class="px-8 py-3 bg-green-600 text-white rounded-full font-semibold">
+            Call to action principal
+          </button>
+          <button class="px-8 py-3 bg-white text-gray-900 rounded-full font-semibold">
+            Call to action secundario
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <button class="absolute left-8 top-1/2 -translate-y-1/2 w-14 h-14 bg-green-600 text-white rounded-full">
+      ←
+    </button>
+    <button class="absolute right-8 top-1/2 -translate-y-1/2 w-14 h-14 bg-green-600 text-white rounded-full">
+      →
+    </button>
+  </div>
+</div>
+
+<!-- Carrusel Mobile con Tailwind -->
+<div class="relative max-w-sm mx-auto">
+  <div class="relative overflow-hidden rounded-2xl shadow-xl aspect-[9/16]">
+    <img src="imagen.jpg" alt="Banner" class="w-full h-full object-cover" />
+    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+
+    <div class="absolute inset-x-0 bottom-0 p-6 space-y-4">
+      <h3 class="text-white text-2xl font-bold">Título de máximo 41 caracteres</h3>
+      <p class="text-white/90 text-sm">Contexto del banner de máximo 112 caracteres</p>
+
+      <div class="space-y-3">
+        <button class="w-full px-6 py-3 bg-green-600 text-white rounded-full font-semibold">
+          Call to action principal
+        </button>
+        <button class="w-full px-6 py-3 bg-white text-gray-900 rounded-full font-semibold">
+          Call to action secundario
+        </button>
+      </div>
+
+      <div class="flex justify-center gap-4 pt-4">
+        <button class="w-12 h-12 bg-green-600 text-white rounded-full">←</button>
+        <button class="w-12 h-12 bg-green-600 text-white rounded-full">→</button>
+      </div>
+    </div>
+  </div>
+</div>`,
+          react: `import { useState } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+
+const slides = [
+  {
+    image: '/imagen1.jpg',
+    title: 'Título de máximo 41 caracteres',
+    context: 'Contexto del banner de máximo 112 caracteres',
+  },
+];
+
+export default function Carousel({ isMobile = false }) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const goToNext = () => setCurrentIndex((prev) => (prev + 1) % slides.length);
+  const goToPrevious = () => setCurrentIndex((prev) => (prev - 1 + slides.length) % slides.length);
+
+  if (isMobile) {
+    return (
+      <div className="relative max-w-sm mx-auto">
+        <div className="relative overflow-hidden rounded-2xl shadow-xl aspect-[9/16]">
+          <img src={slides[currentIndex].image} className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+
+          <div className="absolute inset-x-0 bottom-0 p-6 space-y-4">
+            <h3 className="text-white text-2xl font-bold">{slides[currentIndex].title}</h3>
+            <p className="text-white/90 text-sm">{slides[currentIndex].context}</p>
+
+            <div className="space-y-3">
+              <button className="w-full px-6 py-3 bg-green-600 text-white rounded-full">
+                Call to action principal
+              </button>
+              <button className="w-full px-6 py-3 bg-white text-gray-900 rounded-full">
+                Call to action secundario
+              </button>
+            </div>
+
+            <div className="flex justify-center gap-4 pt-4">
+              <button onClick={goToPrevious} className="w-12 h-12 bg-green-600 text-white rounded-full">
+                <ChevronLeft />
+              </button>
+              <button onClick={goToNext} className="w-12 h-12 bg-green-600 text-white rounded-full">
+                <ChevronRight />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="relative max-w-6xl mx-auto">
+      <div className="relative overflow-hidden rounded-2xl shadow-xl aspect-[21/9]">
+        <img src={slides[currentIndex].image} className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+
+        <div className="absolute inset-y-0 left-0 flex items-center max-w-xl">
+          <div className="p-12 space-y-4">
+            <h2 className="text-white text-4xl font-bold">{slides[currentIndex].title}</h2>
+            <p className="text-white/90 text-base">{slides[currentIndex].context}</p>
+
+            <div className="flex gap-4 pt-4">
+              <button className="px-8 py-3 bg-green-600 text-white rounded-full">
+                Call to action principal
+              </button>
+              <button className="px-8 py-3 bg-white text-gray-900 rounded-full">
+                Call to action secundario
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <button onClick={goToPrevious} className="absolute left-8 top-1/2 -translate-y-1/2">
+          <ChevronLeft />
+        </button>
+        <button onClick={goToNext} className="absolute right-8 top-1/2 -translate-y-1/2">
+          <ChevronRight />
+        </button>
+      </div>
+    </div>
+  );
+}`
+        }}
+      />
+
+      <MultiCodeExample
+        title="Stepper (4 Pasos)"
+        description="Indicador de progreso con 4 etapas, estado actual destacado, controles de navegación y estados deshabilitados."
+        preview={<StepperDemo />}
+        snippets={{
+          html: `<!-- Stepper HTML -->
+<div class="stepper">
+  <div class="stepper-steps">
+    <div class="stepper-step completed">
+      <div class="stepper-circle">✓</div>
+      <span class="stepper-label">Descubrimiento</span>
+    </div>
+    <div class="stepper-line completed"></div>
+
+    <div class="stepper-step active">
+      <div class="stepper-circle">2</div>
+      <span class="stepper-label">Ideación</span>
+    </div>
+    <div class="stepper-line"></div>
+
+    <div class="stepper-step">
+      <div class="stepper-circle">3</div>
+      <span class="stepper-label">Diseño</span>
+    </div>
+    <div class="stepper-line"></div>
+
+    <div class="stepper-step">
+      <div class="stepper-circle">4</div>
+      <span class="stepper-label">Validación</span>
+    </div>
+  </div>
+
+  <div class="stepper-controls">
+    <button class="btn-secondary">← Anterior</button>
+    <button class="btn-primary">Siguiente →</button>
+  </div>
+</div>`,
+          tailwind: `<!-- Stepper con Tailwind -->
+<div class="bg-white rounded-xl shadow-md p-8">
+  <div class="flex items-center justify-between mb-8">
+    <!-- Paso 1: Completado -->
+    <div class="flex flex-col items-center flex-1">
+      <div class="w-12 h-12 rounded-full bg-green-600 text-white flex items-center justify-center font-bold">
+        ✓
+      </div>
+      <span class="mt-3 text-sm font-semibold text-gray-600">Descubrimiento</span>
+    </div>
+    <div class="flex-1 h-0.5 bg-green-600"></div>
+
+    <!-- Paso 2: Actual -->
+    <div class="flex flex-col items-center flex-1">
+      <div class="w-12 h-12 rounded-full bg-green-600 text-white flex items-center justify-center font-bold ring-4 ring-green-100">
+        2
+      </div>
+      <span class="mt-3 text-sm font-semibold text-green-600">Ideación</span>
+    </div>
+    <div class="flex-1 h-0.5 bg-gray-300"></div>
+
+    <!-- Pasos restantes... -->
+  </div>
+
+  <div class="flex justify-between">
+    <button class="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg font-semibold">
+      ← Anterior
+    </button>
+    <button class="px-6 py-3 bg-green-600 text-white rounded-lg font-semibold">
+      Siguiente →
+    </button>
+  </div>
+</div>`,
+          react: `import { useState } from 'react';
+import { Check } from 'lucide-react';
+
+const steps = ['Descubrimiento', 'Ideación', 'Diseño', 'Validación'];
+
+export default function Stepper() {
+  const [currentStep, setCurrentStep] = useState(0);
+
+  return (
+    <div className="bg-white rounded-xl shadow-md p-8">
+      <div className="flex items-center justify-between mb-8">
+        {steps.map((step, idx) => (
+          <div key={idx} className="flex flex-col items-center flex-1">
+            <div className="flex items-center w-full">
+              {idx > 0 && (
+                <div className={\`flex-1 h-0.5 \${
+                  idx <= currentStep ? 'bg-green-600' : 'bg-gray-300'
+                }\`} />
+              )}
+              <div className={\`w-12 h-12 rounded-full flex items-center justify-center font-bold \${
+                idx < currentStep
+                  ? 'bg-green-600 text-white'
+                  : idx === currentStep
+                  ? 'bg-green-600 text-white ring-4 ring-green-100'
+                  : 'bg-gray-200 text-gray-500'
+              }\`}>
+                {idx < currentStep ? <Check /> : idx + 1}
+              </div>
+              {idx < steps.length - 1 && (
+                <div className={\`flex-1 h-0.5 \${
+                  idx < currentStep ? 'bg-green-600' : 'bg-gray-300'
+                }\`} />
+              )}
+            </div>
+            <span className={\`mt-3 text-sm font-semibold \${
+              idx === currentStep ? 'text-green-600' : 'text-gray-600'
+            }\`}>
+              {step}
+            </span>
+          </div>
+        ))}
+      </div>
+
+      <div className="flex justify-between">
+        <button
+          onClick={() => setCurrentStep(Math.max(0, currentStep - 1))}
+          disabled={currentStep === 0}
+        >
+          ← Anterior
+        </button>
+        <button
+          onClick={() => setCurrentStep(Math.min(steps.length - 1, currentStep + 1))}
+          disabled={currentStep === steps.length - 1}
+        >
+          Siguiente →
+        </button>
+      </div>
+    </div>
+  );
+}`
+        }}
+      />
+
+      <MultiCodeExample
+        title="Cards (Variantes)"
+        description="Tarjetas con múltiples variantes: con imagen superior, con ícono lateral, y vista mobile/desktop."
+        preview={<CardsDemo />}
+        snippets={{
+          html: `<!-- Card Variante 1: Imagen + Label + Título + Botón -->
+<div class="card">
+  <img src="imagen.jpg" alt="Card" class="card-image" />
+  <div class="card-content">
+    <span class="card-label">Destacado</span>
+    <h3 class="card-title">Atención Médica de Excelencia</h3>
+    <p class="card-text">Cuidamos tu salud y bienestar.</p>
+    <button class="btn-primary">Ver más</button>
+  </div>
+</div>
+
+<!-- Card Variante 2: Ícono + Título + Botón + Imagen -->
+<div class="card card-horizontal">
+  <div class="card-icon">❤</div>
+  <div class="card-content">
+    <h3 class="card-title">Cuidado Integral</h3>
+    <p class="card-text">Servicios completos para tu familia.</p>
+    <button class="btn-primary">Conocer más</button>
+    <img src="imagen.jpg" alt="Apoyo" class="card-image-small" />
+  </div>
+</div>`,
+          tailwind: `<!-- Card V1: Imagen Superior con Tailwind -->
+<div class="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all">
+  <div class="relative h-48 bg-gradient-to-br from-green-600 to-green-500">
+    <img src="imagen.jpg" alt="Salud" class="w-full h-full object-cover" />
+  </div>
+  <div class="p-6">
+    <span class="inline-block px-3 py-1 bg-green-100 text-green-600 text-xs font-bold rounded-full mb-3">
+      Destacado
+    </span>
+    <h3 class="text-xl font-bold text-gray-900 mb-3">
+      Atención Médica de Excelencia
+    </h3>
+    <p class="text-gray-600 mb-4">
+      Contamos con los mejores profesionales para cuidar tu salud.
+    </p>
+    <button class="w-full px-6 py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700">
+      Ver más
+    </button>
+  </div>
+</div>
+
+<!-- Card V2: Ícono Lateral -->
+<div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl">
+  <div class="flex gap-4">
+    <div class="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center">
+      ❤
+    </div>
+    <div class="flex-1">
+      <h3 class="text-xl font-bold mb-2">Cuidado Integral</h3>
+      <p class="text-gray-600 mb-4">Servicios completos.</p>
+      <button class="px-6 py-2 bg-blue-600 text-white rounded-lg">
+        Conocer más
+      </button>
+    </div>
+  </div>
+</div>`,
+          react: `import { Heart, CheckCircle } from 'lucide-react';
+
+export default function Cards() {
+  return (
+    <div className="grid md:grid-cols-2 gap-6">
+      {/* Card V1: Imagen Superior */}
+      <div className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all">
+        <div className="relative h-48">
+          <img
+            src="/imagen.jpg"
+            alt="Salud"
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <div className="p-6">
+          <span className="inline-block px-3 py-1 bg-green-100 text-green-600 text-xs font-bold rounded-full mb-3">
+            Destacado
+          </span>
+          <h3 className="text-xl font-bold text-gray-900 mb-3">
+            Atención Médica
+          </h3>
+          <p className="text-gray-600 mb-4">
+            Cuidamos tu salud y bienestar.
+          </p>
+          <button className="w-full px-6 py-3 bg-green-600 text-white rounded-lg font-semibold">
+            Ver más
+          </button>
+        </div>
+      </div>
+
+      {/* Card V2: Ícono Lateral */}
+      <div className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl">
+        <div className="flex gap-4">
+          <div className="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center">
+            <Heart className="w-8 h-8 text-blue-600" />
+          </div>
+          <div className="flex-1">
+            <h3 className="text-xl font-bold mb-2">Cuidado Integral</h3>
+            <p className="text-gray-600 mb-4">Servicios completos.</p>
+            <button className="px-6 py-2 bg-blue-600 text-white rounded-lg">
+              Conocer más
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}`
+        }}
+      />
+
       <ComponentExample
         title="Botones"
         description="Variantes de botones con diferentes estilos y todos los tamaños disponibles."
@@ -200,48 +812,6 @@ export default function ComponentGallery() {
 <button class="btn btn--primary" disabled>Deshabilitado</button>
 <button class="btn btn--danger">Peligro</button>
 <button class="btn btn--warning">Advertencia</button>`}
-      />
-
-      <ComponentExample
-        title="Cards"
-        description="Tarjetas con encabezado, cuerpo y acción opcional."
-        preview={
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl">
-            <div className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-shadow">
-              <h5 className="text-lg font-bold text-[#373737] mb-3">Tarjeta Básica</h5>
-              <p className="text-gray-600 mb-4 leading-relaxed">
-                Esta es una tarjeta simple con contenido de ejemplo. Ideal para mostrar información breve y concisa.
-              </p>
-              <button className="px-4 py-2 bg-[#27933E] text-white rounded-lg text-sm font-semibold hover:bg-[#13C045] transition-colors">
-                Acción
-              </button>
-            </div>
-            <div className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-shadow">
-              <h5 className="text-lg font-bold text-[#373737] mb-3">Con Imagen</h5>
-              <div className="bg-gradient-to-br from-[#27933E] to-[#2B6BDC] h-32 rounded-xl mb-4"></div>
-              <p className="text-gray-600 leading-relaxed">
-                Tarjeta con imagen decorativa superior.
-              </p>
-            </div>
-          </div>
-        }
-        code={`<!-- Card Básica -->
-<div class="card">
-  <h5 class="card__header">Tarjeta Básica</h5>
-  <p class="card__body">
-    Esta es una tarjeta simple con contenido de ejemplo.
-  </p>
-  <button class="btn btn--primary btn--sm">Acción</button>
-</div>
-
-<!-- Card con Imagen -->
-<div class="card">
-  <h5 class="card__header">Con Imagen</h5>
-  <img src="imagen.jpg" alt="Descripción" class="card__image">
-  <p class="card__body">
-    Tarjeta con imagen decorativa superior.
-  </p>
-</div>`}
       />
 
       <ComponentExample
