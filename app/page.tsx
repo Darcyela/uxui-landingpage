@@ -39,7 +39,7 @@ const navigationCards = [
     icon: FlaskConical,
     href: '/testing',
     gradient: 'from-[#00A859] to-[#006D38]',
-    available: false,
+    available: true, // ← habilitada
   },
 ];
 
@@ -127,6 +127,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
 
       {/* HIDDEN: Metrics section - uncomment to restore
       {metrics && (
