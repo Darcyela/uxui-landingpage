@@ -1,49 +1,111 @@
 'use client';
 
+import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { FlaskConical, Sparkles } from 'lucide-react';
-import SectionHeader from '@/components/SectionHeader';
+import TestingHero from '@/components/testing/TestingHero';
+import TestingProcess from '@/components/testing/TestingProcess';
+import SelfAssessment from '@/components/testing/SelfAssessment';
+import HeuristicEvaluator from '@/components/testing/HeuristicEvaluator';
+import { Card } from '@/components/ui/card';
+import { ExternalLink, BarChart3, MousePointerClick, TestTube2 } from 'lucide-react';
+
+const tools = [
+  {
+    name: 'Hotjar',
+    icon: MousePointerClick,
+    description: 'Mapas de calor, grabaciones de sesión y análisis de comportamiento del usuario.',
+    link: 'https://www.hotjar.com/',
+    color: 'from-red-500 to-orange-500',
+  },
+  {
+    name: 'Google Analytics',
+    icon: BarChart3,
+    description: 'Análisis cuantitativo de tráfico, conversiones y métricas de rendimiento.',
+    link: 'https://analytics.google.com/',
+    color: 'from-yellow-500 to-orange-500',
+  },
+  {
+    name: 'Maze',
+    icon: TestTube2,
+    description: 'Tests de usabilidad remotos, tree testing y validación de prototipos.',
+    link: 'https://maze.co/',
+    color: 'from-purple-500 to-pink-500',
+  },
+];
 
 export default function TestingPage() {
+  const [showGuides, setShowGuides] = useState(false);
+  const assessmentRef = useRef<HTMLDivElement>(null);
+
+  const handleViewGuides = () => {
+    setShowGuides(true);
+    setTimeout(() => {
+      document.getElementById('guides-section')?.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  };
+
+  const handleStartAssessment = () => {
+    setTimeout(() => {
+      document.getElementById('self-assessment')?.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
-      <section className="py-20">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            icon={FlaskConical}
-            title="Testing y Validación"
-            subtitle="Métodos de prueba, resultados de usabilidad y métricas de calidad"
-            centered
-          />
+    <div className="min-h-screen bg-white">
+      <TestingHero onStartAssessment={handleStartAssessment} onViewGuides={handleViewGuides} />
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="max-w-2xl mx-auto mt-16"
-          >
-            <div className="bg-white rounded-2xl p-12 shadow-lg border border-gray-100 text-center">
-              <div className="w-20 h-20 bg-gradient-to-br from-[#00A859] to-[#006D38] rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <Sparkles className="w-10 h-10 text-white" />
-              </div>
+      <TestingProcess />
 
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                Próximamente
-              </h3>
-
-              <p className="text-gray-600 leading-relaxed mb-6">
-                Estamos consolidando nuestros procesos de testing y validación de UX,
-                incluyendo pruebas de usabilidad, tests A/B, métricas de satisfacción
-                y resultados de validación con usuarios reales.
+      {showGuides && (
+        <section id="guides-section" className="py-20 bg-gradient-to-br from-[#2B6BDC]/5 to-[#27933E]/5">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                Herramientas de Testing
+              </h2>
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                Conecta estas herramientas profesionales para comenzar a medir y mejorar la experiencia de usuario.
               </p>
-
-              <div className="inline-flex items-center space-x-2 px-4 py-2 bg-[#00A859]/10 rounded-full text-[#006D38] text-sm font-medium">
-                <span>En desarrollo</span>
-              </div>
             </div>
-          </motion.div>
-        </div>
-      </section>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+              {tools.map((tool, index) => (
+                <motion.div
+                  key={tool.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <Card className="p-8 h-full hover:shadow-2xl transition-all border-2 border-gray-100 hover:border-[#27933E]">
+                    <div className={`w-16 h-16 bg-gradient-to-br ${tool.color} rounded-2xl flex items-center justify-center mb-6 shadow-lg`}>
+                      <tool.icon className="w-8 h-8 text-white" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-4">{tool.name}</h3>
+                    <p className="text-gray-600 text-base mb-6 leading-relaxed">
+                      {tool.description}
+                    </p>
+                    <a
+                      href={tool.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center text-[#27933E] hover:text-[#1f7330] font-bold transition-colors"
+                    >
+                      Visitar sitio web
+                      <ExternalLink className="w-5 h-5 ml-2" />
+                    </a>
+                  </Card>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <div ref={assessmentRef}>
+        <SelfAssessment />
+      </div>
+
+      <HeuristicEvaluator />
     </div>
   );
 }
