@@ -34,7 +34,7 @@ export default function NotFound() {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#00A859] to-[#8CC63F] text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#00A859] to-[#8CC63F] text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all"
               >
                 <Home className="w-5 h-5" />
                 Ir al inicio
@@ -45,7 +45,7 @@ export default function NotFound() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => window.history.back()}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-700 font-semibold rounded-full border-2 border-gray-200 hover:border-[#00A859] transition-all"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-700 font-semibold rounded-xl border-2 border-gray-200 hover:border-[#00A859] transition-all"
             >
               <ArrowLeft className="w-5 h-5" />
               Volver atrás

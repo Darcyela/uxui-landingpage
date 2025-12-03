@@ -111,7 +111,7 @@ export default function CasosDeEjemplo() {
                     href={study.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center space-x-2 w-full px-4 py-2.5 bg-achs-green-primary text-white rounded-full font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-200"
+                    className="flex items-center justify-center space-x-2 w-full px-4 py-2.5 bg-achs-green-primary text-white rounded-xl font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-200"
                   >
                     <span>Ver</span>
                     <ExternalLink className="w-4 h-4" />

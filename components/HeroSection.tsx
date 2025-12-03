@@ -41,7 +41,7 @@ export default function HeroSection() {
                 <motion.div
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-8 py-3 bg-[#00A859] text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
+                  className="px-8 py-3 bg-[#00A859] text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
                 >
                   Explorar Proceso
                 </motion.div>
@@ -51,7 +51,7 @@ export default function HeroSection() {
                 <motion.div
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-8 py-3 bg-white text-[#00A859] rounded-full font-semibold border-2 border-[#00A859] hover:bg-[#00A859]/5 transition-colors cursor-pointer"
+                  className="px-8 py-3 bg-white text-[#00A859] rounded-xl font-semibold border-2 border-[#00A859] hover:bg-[#00A859]/5 transition-colors cursor-pointer"
                 >
                   Ver Métricas
                 </motion.div>
