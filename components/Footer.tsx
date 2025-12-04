@@ -22,10 +22,10 @@ export default function Footer() {
           </div>
           <div className="text-center">
             <p className="text-gray-400 text-sm">
-              Asociación Chilena de Seguridad (ACHS) test de prueba
+              Asociación Chilena de Seguridad (Achs)
             </p>
             <p className="text-gray-500 text-xs mt-1">
-              Transformación Digital · {new Date().getFullYear()}
+              Subgerencia Desarrollo Preventivo y Proyectos · {new Date().getFullYear()}
             </p>
           </div>
         </div>
