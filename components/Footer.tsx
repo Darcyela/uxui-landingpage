@@ -17,7 +17,7 @@ export default function Footer() {
           <div className="flex items-center space-x-2">
             <Heart className="w-5 h-5 text-[#00A859]" />
             <span className="text-sm">
-              Creado con dedicación por el Equipo UX
+              hola
             </span>
           </div>
           <div className="text-center">
